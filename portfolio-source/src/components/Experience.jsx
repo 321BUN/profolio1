@@ -79,9 +79,14 @@ export default function Experience({ query }) {
             {projects.map((p) => (
               <article className="proj-card" key={p.id}>
                 <div className="proj-media">
-                  <div className={`ph ${tone(p.cover.hue)}`}>
-                    <span className="ph-label">{p.cover.label}</span>
-                  </div>
+                  {p.cover.image ? (
+                    <img src={p.cover.image} alt={`${p.name} 展示图`} />
+                  ) : (
+                    <div className={`ph ${tone(p.cover.hue)}`}>
+                      <span className="ph-label">{p.cover.label}</span>
+                    </div>
+                  )}
+                  <span className="proj-badge">{p.cover.label}</span>
                 </div>
                 <div className="proj-body">
                   <div className="proj-name">{p.name}</div>

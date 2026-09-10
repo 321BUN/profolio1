@@ -1,6 +1,8 @@
 import Highlight from './Highlight'
 import { profile, gaming, skills } from '../data/resume'
 
+const portraitImg = `${import.meta.env.BASE_URL || './'}portrait.jpg`
+
 export default function About({ query }) {
   const { education } = profile
   return (
@@ -14,16 +16,17 @@ export default function About({ query }) {
         </div>
 
         <div className="about-grid">
-          {/* 头像 / 人物图占位 */}
+          {/* 头像 / 人物图 */}
           <div className="portrait">
-            <div className="ph-initial">{profile.name[0]}</div>
-            <div className="ph-label">人物图占位 · 替换为职业照 / 形象照</div>
+            <img src={portraitImg} alt={`${profile.name} 个人照片`} />
           </div>
 
           <div className="about-bio">
-            <p className="lead">
-              <Highlight text={profile.intro} query={query} />
-            </p>
+            {profile.introLines.map((line, i) => (
+              <p className="lead lead-sm" key={i}>
+                <Highlight text={line} query={query} />
+              </p>
+            ))}
 
             <div className="about-facts">
               <div className="fact">
@@ -67,11 +70,18 @@ export default function About({ query }) {
             <p style={{ marginTop: 14, color: 'var(--ink-2)', fontSize: 15.5 }}>
               <Highlight text={gaming.summary} query={query} />
             </p>
-            <div className="games-list">
-              {gaming.titles.map((g) => (
-                <div className="game-row" key={g.name}>
-                  <span className="gn"><Highlight text={g.name} query={query} /></span>
-                  <span className="gnt">{g.note}</span>
+            <div className="games-cats">
+              {gaming.categories.map((g) => (
+                <div className="game-cat" key={g.cat}>
+                  <div className="gc-name">
+                    <Highlight text={g.cat} query={query} />
+                  </div>
+                  {g.items.map((t) => (
+                    <div className="game-row" key={t.name}>
+                      <span className="gn"><Highlight text={t.name} query={query} /></span>
+                      <span className="gnt"><Highlight text={t.note} query={query} /></span>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>

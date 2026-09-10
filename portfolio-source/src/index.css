@@ -371,6 +371,7 @@ mark.hl {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-family: var(--serif); font-weight: 700; font-size: clamp(120px, 18vw, 220px); color: rgba(35,34,32,0.10);
 }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .about-bio .lead {
   font-family: var(--serif);
   font-size: clamp(20px, 2.4vw, 30px);
@@ -379,6 +380,13 @@ mark.hl {
   font-weight: 500;
   margin-bottom: 26px;
 }
+/* 一句一段的个人介绍：稍小一号、段间留白 */
+.about-bio .lead-sm {
+  font-size: clamp(17.5px, 1.75vw, 23px);
+  line-height: 1.72;
+  margin-bottom: 0;
+}
+.about-bio .lead-sm + .lead-sm { margin-top: 14px; }
 .about-bio p { color: var(--ink-2); font-size: 16px; max-width: 56ch; }
 .about-facts {
   margin-top: 36px;
@@ -458,17 +466,28 @@ mark.hl {
 .metric .mk { margin-top: 6px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; }
 
 /* 项目区使用更紧凑的卡片网格 */
-.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(28px, 3vw, 44px); }
+.proj-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 3vw, 44px); }
 .proj-card {
   background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
-  display: flex; flex-direction: column;
+  display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: stretch;
   transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 .proj-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-.proj-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+.proj-media { position: relative; min-height: 100%; overflow: hidden; }
+.proj-media img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; transition: transform 0.7s var(--ease);
+}
+.proj-card:hover .proj-media img { transform: scale(1.05); }
 .proj-media .ph { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 22px; transition: transform 0.7s var(--ease); }
 .proj-card:hover .proj-media .ph { transform: scale(1.05); }
 .proj-media .ph-label { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; color: var(--ink); background: rgba(252,251,248,0.82); padding: 8px 13px; border-radius: 9px; backdrop-filter: blur(6px); }
+.proj-badge {
+  position: absolute; left: 22px; bottom: 20px;
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em;
+  color: var(--ink); background: rgba(252,251,248,0.85);
+  padding: 8px 13px; border-radius: 9px; backdrop-filter: blur(6px);
+}
 .proj-body { padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column; flex: 1; }
 .proj-name { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 600; }
 .proj-meta { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: 0.06em; margin-top: 4px; }
@@ -487,15 +506,42 @@ mark.hl {
 .campus-head .period { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); margin-top: 8px; letter-spacing: 0.06em; }
 .campus-head .summary { margin-top: 18px; color: var(--ink-2); font-size: 15.5px; }
 
+/* 文创作品集卡 */
+.wc-card {
+  margin-top: clamp(28px, 3vw, 44px);
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: 22px;
+  padding: clamp(30px, 3.4vw, 56px);
+  box-shadow: var(--shadow-sm);
+}
+.wc-badge { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
+.wc-grid { margin-top: 26px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(30px, 4vw, 64px); align-items: start; }
+.wc-title { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 34px); font-weight: 600; }
+.wc-meta { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: 0.06em; margin-top: 8px; }
+.wc-summary { margin-top: 18px; color: var(--ink-2); font-size: 15.5px; max-width: 58ch; }
+.wc-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.wc-fig { margin: 0; border-radius: 16px; overflow: hidden; aspect-ratio: 3 / 4.1; box-shadow: var(--shadow-md); background: var(--paper-2); }
+.wc-fig img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s var(--ease); }
+.wc-card:hover .wc-fig img { transform: scale(1.04); }
+
 /* =========================================================
    游戏经历 + 技能（关于页下方补充条）
    ========================================================= */
 .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 4vw, 72px); }
+.games-cats { margin-top: 22px; display: flex; flex-direction: column; gap: 26px; }
+.game-cat { display: flex; flex-direction: column; gap: 10px; }
+.game-cat .gc-name {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.18em;
+  color: var(--sage); font-weight: 600;
+  display: flex; align-items: center; gap: 12px;
+}
+.game-cat .gc-name::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.game-cat .game-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 18px; }
 .games-list { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
 .game-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); }
 .game-row:hover { border-color: var(--sage); transform: translateX(4px); }
 .game-row .gn { font-family: var(--serif); font-size: 18px; font-weight: 500; }
-.game-row .gnt { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+.game-row .gnt { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
 .skills-block { margin-top: 22px; display: flex; flex-direction: column; gap: 20px; }
 .skill-item .sg { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); }
 .skill-item .st { margin-top: 8px; color: var(--ink-2); font-size: 15px; }
@@ -568,7 +614,11 @@ mark.hl {
   .exp-card, .exp-card.reverse { grid-template-columns: 1fr; }
   .exp-card.reverse .exp-media { order: 0; }
   .proj-grid { grid-template-columns: 1fr; }
+  .proj-card { grid-template-columns: 1fr; }
+  .proj-media { aspect-ratio: 16/10; min-height: 0; }
   .campus-card { grid-template-columns: 1fr; }
+  .wc-grid { grid-template-columns: 1fr; }
+  .wc-imgs { max-width: 640px; }
   .split-2 { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .hero-meta { display: none; }

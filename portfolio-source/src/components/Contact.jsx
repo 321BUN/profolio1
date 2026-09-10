@@ -7,8 +7,7 @@ export default function Contact() {
       <div className="container">
         <div className="contact-eyebrow">Let's talk · 期待与你共事</div>
         <h2 className="contact-title">
-          如果你也在寻找<br />
-          <span className="accent">懂内容、懂用户的</span>游戏运营，
+          感谢您的<span className="accent">观看</span>
         </h2>
         <p className="contact-sub">
           欢迎就实习 / 校招机会与我联系。简历与作品细节可进一步提供，期待聊聊游戏、内容与增长。
@@ -42,7 +41,7 @@ export default function Contact() {
         </div>
 
         <div className="contact-foot">
-          <span>© {year} {profile.name} · {profile.role} Portfolio</span>
+          <span>© {year} {profile.name} · Personal Portfolio</span>
           <span>Built with React + Vite</span>
         </div>
       </div>

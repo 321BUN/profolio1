@@ -1,5 +1,5 @@
 import Highlight from './Highlight'
-import { campus } from '../data/resume'
+import { campus, portfolio } from '../data/resume'
 
 export default function Campus({ query }) {
   return (
@@ -37,6 +37,39 @@ export default function Campus({ query }) {
             </div>
           </article>
         ))}
+
+        {/* 文创作品集 */}
+        <article className="wc-card" id="portfolio">
+          <div className="wc-badge">Portfolio · 文创作品集</div>
+          <div className="wc-grid">
+            <div className="wc-body">
+              <div className="wc-title">
+                <Highlight text={portfolio.title} query={query} />
+              </div>
+              <div className="wc-meta">
+                {portfolio.titleEn} · {portfolio.role} · {portfolio.period}
+              </div>
+              <p className="wc-summary"><Highlight text={portfolio.summary} query={query} /></p>
+              <div className="exp-tags">
+                {portfolio.tags.map((t) => (
+                  <span className="tag" key={t}><Highlight text={t} query={query} /></span>
+                ))}
+              </div>
+              <ul className="exp-highlights">
+                {portfolio.highlights.map((h, i) => (
+                  <li key={i}><Highlight text={h} query={query} /></li>
+                ))}
+              </ul>
+            </div>
+            <div className="wc-imgs">
+              {portfolio.images.map((im) => (
+                <figure className="wc-fig" key={im.src}>
+                  <img src={im.src} alt={im.alt} />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   )

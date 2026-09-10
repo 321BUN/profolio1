@@ -11,7 +11,8 @@ export default defineConfig({
         format: 'iife',
         inlineDynamicImports: true,
         entryFileNames: 'assets/app.js',
-        assetFileNames: 'assets/app[extname]',
+        // 带哈希且与 app.js 同目录：iife 下资源 URL 按「脚本所在目录 + 文件名」解析
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
   },

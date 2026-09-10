@@ -7,7 +7,6 @@ import path from 'node:path'
 
 const DIST = 'dist'
 const OUT = 'portfolio-offline'          // 离线版输出目录
-const VIDEO = 'hero.mp4'
 
 fs.rmSync(OUT, { recursive: true, force: true })
 fs.mkdirSync(OUT, { recursive: true })
@@ -31,13 +30,15 @@ html = html.replace(/<script[^>]*src="([^"]+)"[^>]*><\/script>/g, (_m, src) => {
   return `<script>\nwindow.addEventListener('DOMContentLoaded',function(){\n${js}\n});\n</script>`
 })
 
-// 视频保持同目录相对引用
+// 静态资源（public/ 下的图片、视频）已随构建复制到 dist 根目录，
+// 引用方式为相对页面路径，离线目录与 dist 结构保持一致即可
 fs.writeFileSync(path.join(OUT, 'index.html'), html)
-if (fs.existsSync(path.join(DIST, VIDEO))) {
-  fs.copyFileSync(path.join(DIST, VIDEO), path.join(OUT, VIDEO))
+const MEDIA_RE = /\.(mp4|webm|ogg|mp3|png|jpe?g|webp|svg|ico)$/i
+for (const f of fs.readdirSync(DIST)) {
+  if (MEDIA_RE.test(f)) fs.copyFileSync(path.join(DIST, f), path.join(OUT, f))
 }
 
 const htmlSize = fs.statSync(path.join(OUT, 'index.html')).size
 console.log('离线版已生成 ->', OUT)
 console.log('index.html:', (htmlSize / 1024).toFixed(0) + ' KB')
-console.log('外部依赖:', (html.match(/src="\.\//g) || []).length, '（仅 hero.mp4 视频）')
+console.log('媒体文件:', fs.readdirSync(OUT).filter((f) => MEDIA_RE.test(f)).join(', ') || '（无）')

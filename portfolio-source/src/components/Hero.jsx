@@ -1,27 +1,28 @@
 import SearchBar from './SearchBar'
 import { profile } from '../data/resume'
 
+const heroVideo = `${import.meta.env.BASE_URL || './'}hero.mp4`
+
 export default function Hero({ query, setQuery, goTo }) {
   return (
     <section id="home" className="hero">
       <div className="hero-media">
         {/* CSS 动态背景（视频缺失时自动兜底） */}
         <div className="hero-fallback" />
-        {/* 真实视频背景：将你的视频放到 public/hero.mp4 即可覆盖兜底 */}
+        {/* 真实视频背景（BASE_URL 相对引用，子路径部署也能加载） */}
         <video autoPlay muted loop playsInline preload="auto">
-          <source src="/hero.mp4" type="video/mp4" />
+          <source src={heroVideo} type="video/mp4" />
         </video>
       </div>
       <div className="hero-scrim" />
 
       <div className="hero-content">
         <div className="container">
-          <div className="hero-eyebrow">{profile.role} · {profile.roleEn}</div>
+          <div className="hero-eyebrow">{profile.nameEn} · 2027 届 · {profile.education.school}</div>
 
           <h1 className="hero-title">
-            {profile.headline[0]}
-            <br />
-            <span className="accent">{profile.headline[1]}</span>
+            {profile.name}
+            <span className="accent">。</span>
           </h1>
 
           <p className="hero-sub">{profile.tagline}</p>

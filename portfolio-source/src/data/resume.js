@@ -1,18 +1,25 @@
 // 简历内容结构化数据 —— 后续可直接在此处替换为真实文案 / 补充作品图
+// 静态资源放 public/，用 BASE_URL 相对引用：GitHub Pages 子路径 / 本地 file:// 均可用
+const B = import.meta.env.BASE_URL || './'
+const portraitImg = `${B}portrait.jpg`
+const nvshuCover = `${B}nvshu-cover.jpg`
+const wenchuang1 = `${B}wenchuang-1.jpg`
+const wenchuang2 = `${B}wenchuang-2.jpg`
+
 export const profile = {
   name: '胡彦彬',
   nameEn: 'Hu Yanbin',
-  role: '游戏运营',
-  roleEn: 'Game Operations',
-  // Hero 大标题用的主张句
-  headline: ['用内容理解用户，', '用数据驱动增长。'],
   tagline: '文化产业管理专业 · 内容 / 活动运营实战 · 重度社媒玩家',
   email: '1482963495@qq.com',
   phone: '13538980021',
   birth: '2005.02',
   location: '广州 · 暨南大学',
-  intro:
-    '文化产业管理专业在读，拥有 3 段内容 / 活动运营实战经历。深度理解小红书、B 站等内容生态与流量分发逻辑，擅长从数据中提炼用户偏好、将热点转化为适配游戏卖点的内容创意。长期关注 AI 工具在内容生产中的应用，乐于用新方法提效。',
+  // 个人介绍：一句一段
+  introLines: [
+    '文化产业管理专业在读，拥有 3 段内容 / 活动运营实战经历。',
+    '深度理解小红书、B 站等内容生态与流量分发逻辑，擅长从数据中提炼用户偏好、将热点转化为适配游戏卖点的内容创意。',
+    '长期关注 AI 工具在内容生产中的应用，乐于用新方法提效。',
+  ],
   education: {
     school: '暨南大学',
     schoolEn: 'Jinan University',
@@ -77,8 +84,8 @@ export const internships = [
 export const projects = [
   {
     id: 'proj-nvshu',
-    name: 'GenZ 亚太女书发展计划',
-    nameEn: 'GenZ Asia-Pacific Nüshu Project',
+    name: 'GenZ 女书艺术发展计划',
+    nameEn: 'GenZ Nüshu Art Project',
     role: '内容 / 活动策划',
     period: '2023.12 – 2024.12',
     tags: ['跨界合作', '社媒运营', '文化传播'],
@@ -86,14 +93,14 @@ export const projects = [
       '面向年轻群体的非遗文化传播项目，负责跨界合作对接与社媒账号从 0 到 1 增长。',
     highlights: [
       '跨界合作与活动策划：参与触达数十名多领域女性杰出人物进行访谈合作，与各高校以及文化组织达成联合传播；参与女书文化主题活动策划，协助设计线上线下联动传播方案，吸引超 5000 人次参与。',
-      '内容创意性生产与传播：参与后续相关推文撰写及主流社交媒体（小红书为主）的内容发布与账号运营，累计收获 4000+ 粉丝、总共 8 万获赞与收藏，具备内容调性把控与账号增长的实际经验。',
+      '内容创意性生产与传播：参与后续相关推文撰写及主流社交媒体（小红书 / B 站）的内容发布与账号运营，累计收获 5000+ 粉丝、8.4w+ 获赞，具备内容调性把控与账号增长的实际经验。',
     ],
     metrics: [
       { k: '参与人次', v: '5000+' },
-      { k: '粉丝', v: '4000+' },
-      { k: '获赞收藏', v: '8 万' },
+      { k: '粉丝', v: '5000+' },
+      { k: '获赞', v: '8.4w+' },
     ],
-    cover: { hue: 280, label: '女书文化 · 联名传播视觉' },
+    cover: { hue: 280, image: nvshuCover, label: 'GenZ 女书艺术发展计划 · B 站账号主页' },
   },
 ]
 
@@ -114,17 +121,100 @@ export const campus = [
       { k: '策划活动', v: '5 场' },
     ],
   },
+  {
+    id: 'campus-mengxiang',
+    org: '「梦想杯」竞赛',
+    role: '项目负责人',
+    period: '2024.3 – 2024.5',
+    summary:
+      '从 0 到 1 完成产品策划与路演，获一等奖；以数据调研驱动产品优化。',
+    highlights: [
+      '从 0 到 1 策划：完成市场调研、竞品分析、销售数据分析，独立输出产品策划案及路演 PPT，获一等奖。',
+      '数据处理与分析：通过问卷 / 访谈收集 500+ 用户反馈，反哺产品逻辑优化，锻炼了领导、组织与沟通能力。',
+    ],
+    metrics: [
+      { k: '用户调研', v: '500+' },
+      { k: '奖项', v: '一等奖' },
+    ],
+  },
+  {
+    id: 'campus-live',
+    org: '广东省大学生电商直播技能大赛',
+    role: '项目负责人',
+    period: '2023.11 – 2023.12',
+    summary:
+      '以乡村扶农为主题完成电商带货实战，覆盖选品、营销策划与转化链路设计。',
+    highlights: [
+      '电商带货实战：基于乡村扶农主题，筛选 20+ 特色农产品制定营销策划；熟悉选品、流量运营与转化链路设计。',
+    ],
+    metrics: [
+      { k: '特色农产品', v: '20+' },
+      { k: '角色', v: '项目负责人' },
+    ],
+  },
 ]
 
-// 游戏经历（个人画像）
+// 文创作品集（课程实践成果）
+export const portfolio = {
+  id: 'pf-wenchuang',
+  title: '「塔映花城」异形拼合台历',
+  titleEn: 'Pagoda Mirroring the Flower City',
+  role: '文创产品策划 · 小组作品',
+  period: '2025.9 – 2025.12',
+  tags: ['文创策划', 'IP 活化', '产品打样', '线下布展'],
+  summary:
+    '以 2025 年“羊城八景”之「塔映花城」为文化内核的城市文创产品策划，完成从调研到布展的全流程落地。',
+  highlights: [
+    '选题与文化挖掘：依托国家公园文创扶持与广州八景文化活化相关政策，立足全国独有的中轴线海珠湿地，瞄准景区“无台历类文创”的市场空白，确立“城市与自然对望”的产品立意。',
+    '产品创意设计：设计六页双月异形插卡台历——日常插放底座作桌面日历，卡片背面兼具湿地科普与记事功能，年末可逐月拼合为一幅完整的广州中轴线长卷，兼具实用、观赏、收藏与礼品属性。',
+    '全流程落地：完成政策研读、实地调研、PEST / SWOT 分析、插画设计、成本测算、打样量产与线下布展的完整文创开发链路。',
+  ],
+  images: [
+    { src: wenchuang1, alt: '塔映花城台历 · 三月页实拍' },
+    { src: wenchuang2, alt: '塔映花城台历 · 木质底座实拍' },
+  ],
+}
+
+// 游戏经历（个人画像，按品类分组）
 export const gaming = {
   summary:
-    '10 多年游戏经历，深度覆盖女性向、国风及二次元品类，日常关注游戏 UCG 内容、游戏 IP 联动、潮玩文创等跨赛道品牌合作活动。',
-  titles: [
-    { name: '暖暖系列', note: '无限暖暖满级' },
-    { name: '恋与制作人', note: '70 级+' },
-    { name: '苏丹的世界', note: '100h+' },
-    { name: '一梦江湖', note: '80 级+' },
+    '10 多年游戏经历，覆盖换装、乙女向、开放世界 RPG、卡牌与 ACT 等品类，日常关注游戏 UCG 内容、游戏 IP 联动、潮玩文创等跨赛道品牌合作活动。',
+  categories: [
+    {
+      cat: '换装游戏',
+      items: [
+        {
+          name: '暖暖系列',
+          note: '暖暖环游世界 / 奇迹暖暖 / 闪耀暖暖 / 无限暖暖 · 无限暖暖满级，PC 端 200h+、安卓端 1000h+，累计充值 200+ 元（主要用于版本礼包），剧情已推进至最新章节',
+        },
+      ],
+    },
+    {
+      cat: '乙女向游戏',
+      items: [
+        { name: '恋与制作人', note: '70 级+ · 总游玩时长 500h+' },
+      ],
+    },
+    {
+      cat: '开放世界 RPG',
+      items: [
+        { name: '无限暖暖', note: '满级 · 大世界探索体验详见「换装游戏」' },
+        { name: '原神', note: '40 级+ · 游玩时长 500h+ · 蒙德 / 璃月 / 至冬剧情推进完毕' },
+        { name: '洛克王国：世界', note: '50 级+ · 游玩时长 800h+' },
+      ],
+    },
+    {
+      cat: '卡牌游戏',
+      items: [
+        { name: '苏丹的游戏', note: '游玩时长 300h+ · 达成约 50 种结局' },
+      ],
+    },
+    {
+      cat: 'ACT 游戏',
+      items: [
+        { name: '双人成行', note: '全通关' },
+      ],
+    },
   ],
 }
 
@@ -165,19 +255,25 @@ export const searchSections = [
     id: 'about',
     label: '个人信息',
     text: [
-      profile.name, profile.nameEn, profile.role, profile.tagline,
-      profile.intro, profile.location, profile.email,
+      profile.name, profile.nameEn, profile.tagline,
+      ...profile.introLines, profile.location, profile.email,
       profile.education.school, profile.education.schoolEn, profile.education.major,
       profile.education.period, profile.education.gpa, profile.education.courses.join(' '),
     ].join(' '),
   },
   { id: 'experience', label: '实习经历', text: listText(internships) },
   { id: 'project', label: '项目经历', text: listText(projects) },
-  { id: 'campus', label: '校园经历', text: listText(campus) },
+  { id: 'campus', label: '校园经历', text: [...campus, portfolio].map(itemText).join(' ') },
   {
     id: 'gaming',
     label: '游戏经历',
-    text: [gaming.summary, ...gaming.titles.map((t) => `${t.name} ${t.note}`)].join(' '),
+    text: [
+      gaming.summary,
+      ...gaming.categories.flatMap((c) => [
+        c.cat,
+        ...c.items.map((t) => `${t.name} ${t.note}`),
+      ]),
+    ].join(' '),
   },
   {
     id: 'skills',
