@@ -98,7 +98,7 @@ export default function About({ query }) {
           </div>
         </div>
 
-        {/* 技能与评价（全宽，卡片网格） */}
+        {/* 技能与评价（全宽，沿用原有排版 · 两栏无卡片） */}
         <div className="about-block" id="skills" style={{ marginTop: 'clamp(60px,7vw,110px)' }}>
           <div className="mini-title">Skills & Self · 技能与评价</div>
           <div className="skills-block">
@@ -110,14 +110,6 @@ export default function About({ query }) {
                 ))}
               </div>
             ))}
-            <div className="skill-item genre-card">
-              <div className="sg">Covered Genres · 涉猎品类</div>
-              <div className="chips">
-                {gaming.categories.map((g) => (
-                  <span className="tag" key={g.cat}><Highlight text={g.cat} query={query} /></span>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>

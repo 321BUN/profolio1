@@ -1,18 +1,58 @@
+import { useEffect, useRef } from 'react'
 import SearchBar from './SearchBar'
 import { profile } from '../data/resume'
 
-const heroVideo = `${import.meta.env.BASE_URL || './'}hero.mp4`
-
 export default function Hero({ query, setQuery, goTo }) {
+  const heroRef = useRef(null)
+  const glowRef = useRef(null)
+
+  /* 鼠标色彩跟踪：光晕位置缓动跟随 + 色相随横向位置微偏，出界淡出 */
+  useEffect(() => {
+    const hero = heroRef.current
+    const glow = glowRef.current
+    if (!hero || !glow) return
+    if (window.matchMedia('(hover: none)').matches) return
+
+    let tx = hero.clientWidth * 0.62
+    let ty = hero.clientHeight * 0.34
+    let x = tx, y = ty, raf = 0
+
+    const onMove = (e) => {
+      const r = hero.getBoundingClientRect()
+      tx = e.clientX - r.left
+      ty = e.clientY - r.top
+    }
+    const onEnter = () => { glow.style.opacity = '0.72' }
+    const onLeave = () => { glow.style.opacity = '0' }
+
+    const tick = () => {
+      x += (tx - x) * 0.055
+      y += (ty - y) * 0.055
+      glow.style.transform = `translate3d(${x}px, ${y}px, 0)`
+      const hx = Math.min(1, Math.max(0, x / Math.max(1, hero.clientWidth)))
+      glow.style.filter = `blur(26px) saturate(1.05) hue-rotate(${Math.round((hx - 0.5) * 46)}deg)`
+      raf = requestAnimationFrame(tick)
+    }
+
+    hero.addEventListener('mousemove', onMove)
+    hero.addEventListener('mouseenter', onEnter)
+    hero.addEventListener('mouseleave', onLeave)
+    raf = requestAnimationFrame(tick)
+    return () => {
+      hero.removeEventListener('mousemove', onMove)
+      hero.removeEventListener('mouseenter', onEnter)
+      hero.removeEventListener('mouseleave', onLeave)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" ref={heroRef}>
       <div className="hero-media">
-        {/* CSS 动态背景（视频缺失时自动兜底） */}
+        {/* 朦胧绚烂的 CSS 动态光晕背景 */}
         <div className="hero-fallback" />
-        {/* 真实视频背景（BASE_URL 相对引用，子路径部署也能加载） */}
-        <video autoPlay muted loop playsInline preload="auto">
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        {/* 鼠标色彩跟踪光晕 */}
+        <div className="hero-glow" ref={glowRef} />
       </div>
       <div className="hero-scrim" />
 
