@@ -63,60 +63,59 @@ export default function About({ query }) {
           </div>
         </div>
 
-        {/* 游戏经历 + 技能评价 */}
-        <div className="split-2" style={{ marginTop: 'clamp(60px,7vw,110px)' }}>
-          <div id="gaming">
-            <div className="mini-title">Game Experience · 游戏经历</div>
-            <p style={{ marginTop: 14, color: 'var(--ink-2)', fontSize: 15.5 }}>
-              <Highlight text={gaming.summary} query={query} />
-            </p>
-            <div className="games-cats">
-              {gaming.categories.map((g) => (
-                <div className="game-cat" key={g.cat}>
-                  <div className="gc-name">
-                    <Highlight text={g.cat} query={query} />
+        {/* 游戏经历（全宽） */}
+        <div className="about-block" id="gaming" style={{ marginTop: 'clamp(60px,7vw,110px)' }}>
+          <div className="mini-title">Game Experience · 游戏经历</div>
+          <p style={{ marginTop: 14, color: 'var(--ink-2)', fontSize: 15.5 }}>
+            <Highlight text={gaming.summary} query={query} />
+          </p>
+          <div className="games-cats">
+            {gaming.categories.map((g) => (
+              <div className="game-cat" key={g.cat}>
+                <div className="gc-name">
+                  <Highlight text={g.cat} query={query} />
+                </div>
+                {g.items.map((t) => (
+                  <div className={`game-row${t.report ? ' has-report' : ''}`} key={t.name}>
+                    <span className="gn"><Highlight text={t.name} query={query} /></span>
+                    <span className="gnt"><Highlight text={t.note} query={query} /></span>
+                    {t.report && (
+                      <a
+                        className="gr-link"
+                        href={`#/report/${t.report.id}`}
+                        onClick={(e) => { e.preventDefault(); window.location.hash = `#/report/${t.report.id}` }}
+                      >
+                        {t.report.label}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </a>
+                    )}
                   </div>
-                  {g.items.map((t) => (
-                    <div className={`game-row${t.report ? ' has-report' : ''}`} key={t.name}>
-                      <span className="gn"><Highlight text={t.name} query={query} /></span>
-                      <span className="gnt"><Highlight text={t.note} query={query} /></span>
-                      {t.report && (
-                        <a
-                          className="gr-link"
-                          href={`#/report/${t.report.id}`}
-                          onClick={(e) => { e.preventDefault(); window.location.hash = `#/report/${t.report.id}` }}
-                        >
-                          {t.report.label}
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div id="skills">
-            <div className="mini-title">Skills & Self · 技能与评价</div>
-            <div className="skills-block">
-              {skills.map((s) => (
-                <div className="skill-item" key={s.group}>
-                  <div className="sg"><Highlight text={s.group} query={query} /></div>
-                  {s.lines.map((l, i) => (
-                    <p className="st" key={i}><Highlight text={l} query={query} /></p>
-                  ))}
-                </div>
-              ))}
-              <div className="skill-item genre-card">
-                <div className="sg">Covered Genres · 涉猎品类</div>
-                <div className="chips">
-                  {gaming.categories.map((g) => (
-                    <span className="tag" key={g.cat}><Highlight text={g.cat} query={query} /></span>
-                  ))}
-                </div>
+        {/* 技能与评价（全宽，卡片网格） */}
+        <div className="about-block" id="skills" style={{ marginTop: 'clamp(60px,7vw,110px)' }}>
+          <div className="mini-title">Skills & Self · 技能与评价</div>
+          <div className="skills-block">
+            {skills.map((s) => (
+              <div className="skill-item" key={s.group}>
+                <div className="sg"><Highlight text={s.group} query={query} /></div>
+                {s.lines.map((l, i) => (
+                  <p className="st" key={i}><Highlight text={l} query={query} /></p>
+                ))}
+              </div>
+            ))}
+            <div className="skill-item genre-card">
+              <div className="sg">Covered Genres · 涉猎品类</div>
+              <div className="chips">
+                {gaming.categories.map((g) => (
+                  <span className="tag" key={g.cat}><Highlight text={g.cat} query={query} /></span>
+                ))}
               </div>
             </div>
           </div>
