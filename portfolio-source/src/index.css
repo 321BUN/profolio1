@@ -18,13 +18,13 @@
   --line: #ded8cd;
   --line-strong: #c9c2b5;
 
-  /* 低饱和强调色（明亮、克制） */
-  --sage: #8c9b7e;
-  --sage-soft: #e4e8dd;
-  --clay: #c49a82;
-  --clay-soft: #f0e3da;
-  --blue: #92a7b0;
-  --blue-soft: #e1e8ea;
+  /* 低饱和强调色（雾蓝 × 暖橙，呼应头图光晕，克制） */
+  --sage: #7d8aa5;
+  --sage-soft: #e6e8ee;
+  --clay: #c9926b;
+  --clay-soft: #f2e4d8;
+  --blue: #8b97b8;
+  --blue-soft: #e3e6ef;
   --gold: #d6c496;
   --gold-soft: #f1ebd9;
 
@@ -212,24 +212,40 @@ mark.hl {
 .hero-media video, .hero-media .hero-fallback {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
-/* 无视频时的 CSS 动态背景（柔和流动） */
+/* 朦胧绚烂 · CSS 动态光晕背景（米白底 + 橙/粉/雾蓝光晕缓慢漂移） */
 .hero-fallback {
   background:
-    radial-gradient(40% 50% at 20% 30%, var(--sage-soft), transparent 70%),
-    radial-gradient(45% 55% at 80% 25%, var(--clay-soft), transparent 72%),
-    radial-gradient(50% 60% at 65% 80%, var(--blue-soft), transparent 75%),
-    radial-gradient(40% 50% at 30% 85%, var(--gold-soft), transparent 72%),
-    var(--paper);
-  background-size: 180% 180%;
-  animation: drift 22s ease-in-out infinite alternate;
+    radial-gradient(36% 46% at 23% 30%, rgba(226,148,96,0.52), transparent 70%),
+    radial-gradient(30% 40% at 79% 20%, rgba(216,158,164,0.46), transparent 72%),
+    radial-gradient(46% 56% at 71% 79%, rgba(125,138,165,0.48), transparent 74%),
+    radial-gradient(26% 34% at 16% 80%, rgba(61,77,115,0.26), transparent 70%),
+    radial-gradient(20% 26% at 55% 46%, rgba(246,238,224,0.7), transparent 74%),
+    linear-gradient(180deg, #f8f5ef 0%, #f3eee5 100%);
+  background-size: 165% 165%;
+  animation: drift 26s ease-in-out infinite alternate;
 }
 @keyframes drift {
   0% { background-position: 0% 0%; }
   100% { background-position: 100% 100%; }
 }
+/* 鼠标色彩跟踪层：大团柔光，位置与色相均随鼠标缓动（JS 驱动） */
+.hero-glow {
+  position: absolute; top: 0; left: 0; z-index: 1;
+  width: 780px; height: 780px;
+  margin: -390px 0 0 -390px;
+  pointer-events: none; will-change: transform, filter;
+  background:
+    radial-gradient(36% 36% at 52% 46%, rgba(228,148,92,0.5), transparent 70%),
+    radial-gradient(28% 28% at 34% 62%, rgba(216,158,164,0.36), transparent 72%),
+    radial-gradient(30% 30% at 66% 36%, rgba(125,138,165,0.34), transparent 74%);
+  filter: blur(26px) saturate(1.05);
+  opacity: 0.72;
+  transition: opacity 0.7s var(--ease);
+}
+@media (hover: none), (max-width: 860px) { .hero-glow { display: none; } }
 .hero-scrim {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(246,244,239,0.14) 0%, rgba(246,244,239,0.05) 35%, rgba(246,244,239,0.48) 82%, rgba(246,244,239,0.90) 100%);
+  background: linear-gradient(180deg, rgba(246,244,239,0.10) 0%, rgba(246,244,239,0.04) 35%, rgba(246,244,239,0.46) 82%, rgba(246,244,239,0.92) 100%);
 }
 .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(60px, 8vw, 110px); }
 .hero-eyebrow {
@@ -528,7 +544,22 @@ mark.hl {
    游戏经历 + 技能（关于页下方补充条）
    ========================================================= */
 .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 4vw, 72px); }
-.games-cats { margin-top: 22px; display: flex; flex-direction: column; gap: 26px; }
+.games-cats {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 2.6vw, 38px) clamp(32px, 4vw, 64px);
+  align-items: start;
+}
+/* 分类数为奇数时，末个跨双列、内部再分两栏，避免末尾整块留白 */
+.games-cats > .game-cat:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px clamp(32px, 4vw, 64px);
+  align-items: start;
+}
+.games-cats > .game-cat:last-child:nth-child(odd) .gc-name { grid-column: 1 / -1; }
 .game-cat { display: flex; flex-direction: column; gap: 10px; }
 .game-cat .gc-name {
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.18em;
@@ -542,9 +573,15 @@ mark.hl {
 .game-row:hover { border-color: var(--sage); transform: translateX(4px); }
 .game-row .gn { font-family: var(--serif); font-size: 18px; font-weight: 500; }
 .game-row .gnt { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
-.skills-block { margin-top: 22px; display: flex; flex-direction: column; gap: 20px; }
+.skills-block {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(22px, 2.4vw, 34px) clamp(32px, 4vw, 64px);
+  align-items: start;
+}
 .skill-item .sg { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); }
-.skill-item .st { margin-top: 8px; color: var(--ink-2); font-size: 15px; }
+.skill-item .st { margin-top: 8px; color: var(--ink-2); font-size: 15px; line-height: 1.8; }
 
 /* 通用块标题（小） */
 .mini-title { font-family: var(--mono); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
@@ -563,9 +600,9 @@ mark.hl {
 .contact::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(38% 48% at 78% 22%, rgba(140,155,126,0.34), transparent 70%),
-    radial-gradient(42% 52% at 18% 82%, rgba(196,154,130,0.30), transparent 72%),
-    radial-gradient(40% 50% at 60% 60%, rgba(146,167,176,0.20), transparent 75%);
+    radial-gradient(38% 48% at 78% 22%, rgba(201,146,107,0.28), transparent 70%),
+    radial-gradient(42% 52% at 18% 82%, rgba(139,151,184,0.24), transparent 72%),
+    radial-gradient(40% 50% at 60% 60%, rgba(216,158,164,0.18), transparent 75%);
 }
 .contact .container { position: relative; z-index: 1; }
 .contact-eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
@@ -712,11 +749,11 @@ mark.hl {
 .wd-foot { padding: clamp(40px, 6vw, 80px) 0; border-top: 1px solid var(--line); }
 
 /* 占位图渐变（按 hue 生成，低饱和明亮） */
-.ph--sage { background: linear-gradient(150deg, #e4e8dd, #cfd8c4); }
-.ph--clay { background: linear-gradient(150deg, #f0e3da, #e3c9b6); }
-.ph--blue { background: linear-gradient(150deg, #e1e8ea, #c7d6da); }
-.ph--gold { background: linear-gradient(150deg, #f1ebd9, #e4d6ad); }
-.ph--lav { background: linear-gradient(150deg, #e8e3ee, #d4cbe0); }
+.ph--sage { background: linear-gradient(150deg, #e9eaee, #ccd3de); }
+.ph--clay { background: linear-gradient(150deg, #f4e8dd, #e0c4ae); }
+.ph--blue { background: linear-gradient(150deg, #e6e9f0, #c6cedf); }
+.ph--gold { background: linear-gradient(150deg, #f3ecdb, #dfd2ae); }
+.ph--lav { background: linear-gradient(150deg, #ece5e7, #d8c9cf); }
 
 /* =========================================================
    响应式（以 PC 为主，做基本收窄）
@@ -949,36 +986,11 @@ mark.hl {
 .wd-ppt-dots { justify-content: center; }
 
 /* ===== 关于页 · 游戏经历 → 技能与评价（上下全宽排列）===== */
-.skills-block {
-  margin-top: 26px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
-  gap: 16px;
-}
-
-/* 技能组卡片：与游戏卡片同风格 */
-.skill-item {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 16px 20px 15px;
-  transition: border-color 0.3s var(--ease);
-}
-.skill-item:hover { border-color: var(--sage); }
-.skill-item .sg {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 16.5px; letter-spacing: 0.02em;
-}
-.skill-item .sg::before {
-  content: ''; width: 4px; height: 16px; flex: none;
-  background: var(--sage); border-radius: 2px;
-}
-.skill-item .st { margin-top: 7px; font-size: 14.5px; line-height: 1.78; color: var(--ink-2); }
-
-/* 涉猎品类 chips 卡 */
-.genre-card .chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
-.genre-card .tag { font-size: 12.5px; padding: 5px 13px; background: var(--sage-soft); border-color: transparent; color: var(--ink); }
-
 @media (max-width: 860px) {
+  .games-cats { grid-template-columns: 1fr; }
+  .games-cats > .game-cat:last-child:nth-child(odd) {
+    grid-column: auto;
+    display: flex; flex-direction: column;
+  }
   .skills-block { grid-template-columns: 1fr; }
 }
