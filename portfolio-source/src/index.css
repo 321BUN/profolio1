@@ -947,3 +947,38 @@ mark.hl {
 .wd-ppt-slide img { width: 100%; display: block; cursor: zoom-in; }
 .wd-ppt .wd-ppt-no { text-align: center; margin-top: 14px; }
 .wd-ppt-dots { justify-content: center; }
+
+/* ===== 关于页 · 游戏经历 → 技能与评价（上下全宽排列）===== */
+.skills-block {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  gap: 16px;
+}
+
+/* 技能组卡片：与游戏卡片同风格 */
+.skill-item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 20px 15px;
+  transition: border-color 0.3s var(--ease);
+}
+.skill-item:hover { border-color: var(--sage); }
+.skill-item .sg {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16.5px; letter-spacing: 0.02em;
+}
+.skill-item .sg::before {
+  content: ''; width: 4px; height: 16px; flex: none;
+  background: var(--sage); border-radius: 2px;
+}
+.skill-item .st { margin-top: 7px; font-size: 14.5px; line-height: 1.78; color: var(--ink-2); }
+
+/* 涉猎品类 chips 卡 */
+.genre-card .chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.genre-card .tag { font-size: 12.5px; padding: 5px 13px; background: var(--sage-soft); border-color: transparent; color: var(--ink); }
+
+@media (max-width: 860px) {
+  .skills-block { grid-template-columns: 1fr; }
+}
