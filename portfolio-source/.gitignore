@@ -1,0 +1,10 @@
+node_modules
+node_modules/
+dist/
+dist-ssr/
+pnpm-lock.yaml
+yarn.lock
+.vite/
+.vite-cache/
+*.local
+.DS_Store
