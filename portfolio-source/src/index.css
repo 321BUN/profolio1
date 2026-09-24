@@ -226,41 +226,28 @@ mark.hl {
 .hero-media video, .hero-media .hero-fallback {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
-/* 梦境光晕主视觉：暖橙 / 粉雾 / 雾蓝多层漂移渐变浅色天空（移除极光后的原版） */
+/* 梦境光晕主视觉：蓝调浅色天空（长春花蓝主导 + 一缕落日橙），其上叠加 Aurora 波浪 */
 .hero-fallback {
   background:
-    radial-gradient(36% 46% at 23% 30%, rgba(226, 148, 96, 0.52), transparent 70%),
-    radial-gradient(30% 40% at 79% 20%, rgba(216, 158, 164, 0.46), transparent 72%),
-    radial-gradient(46% 56% at 71% 79%, rgba(125, 138, 165, 0.48), transparent 74%),
-    radial-gradient(26% 34% at 16% 80%, rgba(61, 77, 115, 0.26), transparent 70%),
-    radial-gradient(20% 26% at 55% 46%, rgba(246, 238, 224, 0.7), transparent 74%),
-    linear-gradient(180deg, #f8f5ef 0%, #f3eee5 100%);
-  background-size: 165% 165%;
-  animation: drift 26s ease-in-out infinite alternate;
+    radial-gradient(34% 46% at 74% 20%, rgba(255, 158, 74, 0.4), transparent 68%),
+    radial-gradient(42% 54% at 16% 26%, rgba(143, 166, 232, 0.5), transparent 72%),
+    radial-gradient(48% 60% at 82% 80%, rgba(77, 102, 176, 0.5), transparent 74%),
+    radial-gradient(36% 48% at 28% 88%, rgba(109, 130, 201, 0.42), transparent 72%),
+    linear-gradient(168deg, #f4f2ec 0%, #e9ecf7 34%, #ccd5ee 68%, #a3b3e0 100%);
+  background-size: 170% 170%;
+  animation: drift 30s ease-in-out infinite alternate;
 }
 @keyframes drift {
   0% { background-position: 0% 0%; }
   100% { background-position: 100% 100%; }
 }
-/* 鼠标色彩跟踪光晕：跟随鼠标缓动移动，色相随横向位置微偏 */
-.hero-glow {
-  position: absolute; top: 0; left: 0; z-index: 1;
-  width: 780px; height: 780px;
-  margin: -390px 0 0 -390px;
-  pointer-events: none; will-change: transform, filter;
-  background:
-    radial-gradient(36% 36% at 52% 46%, rgba(228, 148, 92, 0.5), transparent 70%),
-    radial-gradient(28% 28% at 34% 62%, rgba(216, 158, 164, 0.36), transparent 72%),
-    radial-gradient(30% 30% at 66% 36%, rgba(125, 138, 165, 0.34), transparent 74%);
-  filter: blur(26px) saturate(1.05);
-  opacity: 0.72;
-  transition: opacity 0.7s var(--ease);
-}
+/* Aurora WebGL 波浪层：铺满 hero-media，位于底色之上、遮罩之下 */
+.hero-media .aurora-container { position: absolute; inset: 0; z-index: 1; }
 .hero-scrim {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(246, 244, 239, 0.10) 0%, rgba(246, 244, 239, 0.04) 35%, rgba(246, 244, 239, 0.46) 82%, rgba(246, 244, 239, 0.92) 100%);
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(248, 243, 234, 0.32) 0%, rgba(248, 243, 234, 0.02) 34%, rgba(248, 243, 234, 0.06) 55%, rgba(248, 243, 234, 0.42) 82%, rgba(248, 243, 234, 0.92) 100%);
 }
-.hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(60px, 8vw, 110px); }
+.hero-content { position: relative; z-index: 3; width: 100%; padding-bottom: clamp(60px, 8vw, 110px); }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--mono); font-size: 14.5px; letter-spacing: 0.3em; text-transform: uppercase;
@@ -275,6 +262,7 @@ mark.hl {
   letter-spacing: 0.005em;
   color: var(--ink);
   max-width: 16ch;
+  text-shadow: 0 2px 40px rgba(255, 255, 255, 0.35);
 }
 .hero-title .accent { color: var(--sage); }
 .hero-sub {
@@ -1092,6 +1080,7 @@ mark.hl {
   .skills-block { grid-template-columns: 1fr; }
 }
 
+
 /* ===== AIGC 自媒体账号卡片 ===== */
 .aigc-panel {
   display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px;
@@ -1120,3 +1109,4 @@ mark.hl {
 .aigc-stats i { display: block; font-style: normal; margin-top: 4px; font-size: 14.5px; color: var(--ink-soft); }
 .aigc-go { margin-top: 10px; font-size: 16px; font-weight: 500; border-bottom: 1.5px solid var(--ink); padding-bottom: 3px; }
 @media (max-width: 900px) { .aigc-panel { min-height: 0; } }
+
