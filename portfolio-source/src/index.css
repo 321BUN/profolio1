@@ -619,8 +619,14 @@ mark.hl {
   gap: clamp(22px, 2.4vw, 34px) clamp(32px, 4vw, 64px);
   align-items: start;
 }
-.skill-item .sg { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); }
+.skill-item .sg {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink);
+}
+/* 板块之间的长横线：标题右侧延伸出一条细线，作为视觉分隔 */
+.skill-item .sg::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 .skill-item .st { margin-top: 8px; color: var(--ink-2); font-size: 17px; line-height: 1.8; }
+.skill-item .st + .st { margin-top: 4px; }
 
 /* 通用块标题（小） */
 .mini-title { font-family: var(--mono); font-size: 14.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
