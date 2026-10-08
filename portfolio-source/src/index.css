@@ -579,22 +579,18 @@ mark.hl {
    游戏经历 + 技能（关于页下方补充条）
    ========================================================= */
 .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 4vw, 72px); }
+/* 游戏经历：两栏瀑布流式自然流动（不按网格行对齐，避免左右相互拉高留白） */
 .games-cats {
   margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(24px, 2.6vw, 38px) clamp(32px, 4vw, 64px);
-  align-items: start;
+  column-count: 2;
+  column-gap: clamp(30px, 3.6vw, 58px);
 }
-/* 分类数为奇数时，末个跨双列、内部再分两栏，避免末尾整块留白 */
-.games-cats > .game-cat:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px clamp(32px, 4vw, 64px);
-  align-items: start;
+.games-cats > .game-cat {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: clamp(16px, 1.6vw, 24px);
 }
-.games-cats > .game-cat:last-child:nth-child(odd) .gc-name { grid-column: 1 / -1; }
 .game-cat { display: flex; flex-direction: column; gap: 10px; }
 .game-cat .gc-name {
   font-family: var(--mono); font-size: 14px; letter-spacing: 0.18em;
@@ -1078,11 +1074,8 @@ mark.hl {
 
 /* ===== 关于页 · 游戏经历 → 技能与评价（上下全宽排列）===== */
 @media (max-width: 860px) {
-  .games-cats { grid-template-columns: 1fr; }
-  .games-cats > .game-cat:last-child:nth-child(odd) {
-    grid-column: auto;
-    display: flex; flex-direction: column;
-  }
+  .games-cats { column-count: 1; }
+  .games-cats > .game-cat { margin-bottom: clamp(20px, 2vw, 28px); }
   .skills-block { grid-template-columns: 1fr; }
 }
 

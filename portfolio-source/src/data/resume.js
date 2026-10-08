@@ -270,6 +270,12 @@ export const gaming = {
       ],
     },
     {
+      cat: 'ARPG',
+      items: [
+        { name: '重返未来：1999', note: '游玩时长 50h+' },
+      ],
+    },
+    {
       cat: '乙女向游戏',
       items: [
         { name: '恋与制作人', note: '70 级+ · 总游玩时长 500h+' },
