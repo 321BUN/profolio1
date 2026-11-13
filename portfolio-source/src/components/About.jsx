@@ -1,7 +1,6 @@
 import Highlight from './Highlight'
+import QChar from './QChar'
 import { profile, gaming, skills } from '../data/resume'
-
-const base = import.meta.env.BASE_URL || './'
 
 export default function About({ query }) {
   const { education } = profile
@@ -16,21 +15,8 @@ export default function About({ query }) {
         </div>
 
         <div className="about-grid">
-          {/* 可交互 Q 版形象：鼠标悬停 / 点击时挥手打招呼（wink + 头微偏 + 碎发飘动） */}
-          <div
-            className="portrait qchar"
-            tabIndex={0}
-            role="img"
-            aria-label="Q 版人物形象，鼠标悬停会挥手打招呼"
-            onClick={(e) => e.currentTarget.classList.toggle('q-hi')}
-          >
-            <div className="q-stack">
-              <img className="q-frame q-idle" src={`${base}qchar-idle.jpg`} alt={`${profile.name} 的 Q 版人物形象`} />
-              <img className="q-frame q-wave q-wave-a" src={`${base}qchar-wave-a.jpg`} alt="" aria-hidden="true" />
-              <img className="q-frame q-wave q-wave-b" src={`${base}qchar-wave-b.jpg`} alt="" aria-hidden="true" />
-            </div>
-            <span className="ph-label">Q 版形象 · 把鼠标放上来打个招呼 👋</span>
-          </div>
+          {/* 可交互 Q 版形象（透明背景，悬停挥手 wink 打招呼） */}
+          <QChar name={profile.name} />
 
           <div className="about-bio">
             {profile.introLines.map((line, i) => (
