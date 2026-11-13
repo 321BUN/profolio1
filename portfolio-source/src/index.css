@@ -403,6 +403,25 @@ mark.hl {
   font-family: var(--serif); font-weight: 700; font-size: clamp(134.5px, 20vw, 246.5px); color: rgba(255, 255, 255, 0.35);
 }
 .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ===== 可交互 Q 版形象（悬停挥手） ===== */
+.qchar { cursor: pointer; outline: none; }
+.qchar .q-stack { position: absolute; inset: 0; transform-origin: 50% 92%; }
+.qchar .q-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.qchar .q-wave { opacity: 0; transition: opacity 0.18s var(--ease); }
+.qchar:hover .q-idle, .qchar.q-hi .q-idle, .qchar:focus-visible .q-idle { opacity: 0; }
+.qchar:hover .q-wave-a, .qchar.q-hi .q-wave-a, .qchar:focus-visible .q-wave-a { animation: qwaveflip 0.5s steps(1, end) infinite; }
+.qchar:hover .q-wave-b, .qchar.q-hi .q-wave-b, .qchar:focus-visible .q-wave-b { animation: qwaveflipb 0.5s steps(1, end) infinite; }
+@keyframes qwaveflip  { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes qwaveflipb { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
+/* 打招呼时整体轻轻上下浮动 + 微微侧头 */
+.qchar:hover .q-stack, .qchar.q-hi .q-stack, .qchar:focus-visible .q-stack { animation: qbob 1.7s ease-in-out infinite; }
+@keyframes qbob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-7px) rotate(1.1deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .qchar:hover .q-wave-a, .qchar.q-hi .q-wave-a, .qchar:focus-visible .q-wave-a { animation: none; opacity: 1; }
+  .qchar:hover .q-wave-b, .qchar.q-hi .q-wave-b, .qchar:focus-visible .q-wave-b { animation: none; }
+  .qchar:hover .q-stack, .qchar.q-hi .q-stack, .qchar:focus-visible .q-stack { animation: none; }
+}
 .about-bio .lead {
   font-family: var(--serif);
   font-size: clamp(22.5px, 2.5vw, 33.5px);
