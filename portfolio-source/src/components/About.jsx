@@ -1,6 +1,7 @@
 import Highlight from './Highlight'
-import QChar from './QChar'
 import { profile, gaming, skills } from '../data/resume'
+
+const portraitImg = `${import.meta.env.BASE_URL || './'}portrait.png`
 
 export default function About({ query }) {
   const { education } = profile
@@ -15,8 +16,10 @@ export default function About({ query }) {
         </div>
 
         <div className="about-grid">
-          {/* 可交互 Q 版形象（透明背景，悬停挥手 wink 打招呼） */}
-          <QChar name={profile.name} />
+          {/* 头像 / 人物图 */}
+          <div className="portrait">
+            <img src={portraitImg} alt={`${profile.name} 个人照片`} />
+          </div>
 
           <div className="about-bio">
             {profile.introLines.map((line, i) => (
