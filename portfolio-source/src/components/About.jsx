@@ -16,9 +16,10 @@ export default function About({ query }) {
         </div>
 
         <div className="about-grid">
-          {/* 头像 / 人物图 */}
+          {/* 可交互 Q 版形象（透明背景，悬停挥手 wink 打招呼） */}
+          {/* 静态 Q 版形象：透明背景，直接融入页面底色 */}
           <div className="portrait">
-            <img src={portraitImg} alt={`${profile.name} 个人照片`} />
+            <img src={portraitImg} alt={`${profile.name} 个人形象`} />
           </div>
 
           <div className="about-bio">
