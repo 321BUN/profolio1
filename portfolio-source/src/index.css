@@ -3,11 +3,11 @@
    奶油杏底 × 长春花蓝 × 落日橙 × 霞粉，大型柔焦光晕 + 深蓝剪影
    ========================================================= */
 :root {
-  /* 底色：暖调浅色（内容区暖米白；头图区另用蓝调极光） */
-  --paper: #f8f1ef;
-  --paper-2: #f2e8e6;
-  --surface: #fefbfa;
-  --surface-2: #f9efed;
+  /* 底色：明亮柔和的浅粉（低饱和）；头图区仍用蓝调极光，保持原样 */
+  --paper: #fdf0f3;
+  --paper-2: #f8e5ea;
+  --surface: #fff8fa;
+  --surface-2: #fcedf1;
 
   /* 墨色：剪影深蓝（呼应画面中的人物剪影） */
   --ink: #1e2a5e;
@@ -69,10 +69,10 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(26% 32% at 22% 26%, rgba(249, 158, 74, 0.1), transparent 70%),
-    radial-gradient(24% 30% at 78% 16%, rgba(247, 165, 156, 0.09), transparent 72%),
-    radial-gradient(30% 36% at 72% 80%, rgba(109, 130, 201, 0.12), transparent 74%),
-    radial-gradient(20% 26% at 16% 80%, rgba(255, 184, 77, 0.1), transparent 72%);
+    radial-gradient(26% 32% at 22% 26%, rgba(247, 168, 190, 0.13), transparent 70%),
+    radial-gradient(24% 30% at 78% 16%, rgba(255, 193, 211, 0.12), transparent 72%),
+    radial-gradient(30% 36% at 72% 80%, rgba(226, 178, 205, 0.1), transparent 74%),
+    radial-gradient(20% 26% at 16% 80%, rgba(255, 205, 220, 0.11), transparent 72%);
   filter: blur(34px);
   animation: auraDrift 44s ease-in-out infinite alternate;
 }
@@ -164,7 +164,7 @@ mark.hl {
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(249, 236, 221, 0.78);
+  background: rgba(255, 246, 250, 0.82);
   backdrop-filter: blur(16px) saturate(1.25);
   border-bottom-color: var(--line);
 }
@@ -245,7 +245,7 @@ mark.hl {
 .hero-media .aurora-container { position: absolute; inset: 0; z-index: 1; }
 .hero-scrim {
   position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(180deg, rgba(248, 243, 234, 0.32) 0%, rgba(248, 243, 234, 0.02) 34%, rgba(248, 243, 234, 0.06) 55%, rgba(248, 243, 234, 0.42) 82%, rgba(248, 243, 234, 0.92) 100%);
+  background: linear-gradient(180deg, rgba(253, 240, 243, 0.32) 0%, rgba(253, 240, 243, 0.02) 34%, rgba(253, 240, 243, 0.06) 55%, rgba(253, 240, 243, 0.42) 82%, rgba(253, 240, 243, 0.92) 100%);
 }
 .hero-content { position: relative; z-index: 3; width: 100%; padding-bottom: clamp(60px, 8vw, 110px); }
 .hero-eyebrow {
@@ -285,12 +285,12 @@ mark.hl {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 15px 26px; border-radius: 999px;
   border: 1px solid var(--line-strong);
-  background: rgba(255, 252, 247, 0.35);
+  background: rgba(255, 247, 250, 0.35);
   backdrop-filter: blur(6px);
   font-size: 17px; color: var(--ink-2);
   transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background 0.3s var(--ease);
 }
-.btn-ghost:hover { border-color: var(--ink); color: var(--ink); background: rgba(255, 252, 247, 0.7); }
+.btn-ghost:hover { border-color: var(--ink); color: var(--ink); background: rgba(255, 247, 250, 0.7); }
 .hero-meta {
   position: absolute; right: var(--gutter); bottom: clamp(60px, 8vw, 110px);
   z-index: 2; text-align: right; font-family: var(--mono);
@@ -316,7 +316,7 @@ mark.hl {
 .search-wrap.is-nav .search-box { width: min(300px, 22vw); }
 .search-box {
   display: flex; align-items: center; gap: 10px;
-  background: rgba(255, 252, 247, 0.85);
+  background: rgba(255, 247, 250, 0.85);
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   padding: 12px 18px;
@@ -336,7 +336,7 @@ mark.hl {
 }
 .search-results {
   position: absolute; top: calc(100% + 12px); left: 0; right: 0;
-  background: rgba(255, 252, 247, 0.97);
+  background: rgba(255, 247, 250, 0.97);
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: var(--shadow-md);
@@ -377,32 +377,31 @@ mark.hl {
   gap: clamp(40px, 5vw, 90px);
   align-items: start;
 }
+/* 个人信息 · 静态 Q 版形象：透明底，直接融进页面浅粉底色 */
 .portrait {
   position: relative;
-  border-radius: 26px;
-  overflow: hidden;
   aspect-ratio: 4 / 5;
-  background:
-    radial-gradient(52% 46% at 62% 36%, rgba(255, 178, 94, 0.85), transparent 72%),
-    radial-gradient(70% 66% at 28% 78%, rgba(109, 130, 201, 0.9), transparent 76%),
-    linear-gradient(160deg, #f5e0ca, #8296cf);
-  box-shadow: var(--shadow-md);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
 }
-.portrait::after {
-  content: '';
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4), inset 0 -60px 90px -40px rgba(30, 42, 94, 0.35);
-}
+.portrait::after { display: none; }
 .portrait .ph-label {
   position: absolute; left: 22px; bottom: 20px; right: 22px; z-index: 2;
   font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.12em; color: var(--ink);
-  background: rgba(255, 252, 247, 0.82); padding: 8px 12px; border-radius: 10px; backdrop-filter: blur(6px);
+  background: rgba(255, 247, 250, 0.82); padding: 8px 12px; border-radius: 10px; backdrop-filter: blur(6px);
 }
 .portrait .ph-initial {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-family: var(--serif); font-weight: 700; font-size: clamp(134.5px, 20vw, 246.5px); color: rgba(255, 255, 255, 0.35);
 }
-.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.portrait img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+  display: block;
+}
 .about-bio .lead {
   font-family: var(--serif);
   font-size: clamp(22.5px, 2.5vw, 33.5px);
@@ -425,7 +424,7 @@ mark.hl {
   gap: 1px; background: var(--line);
   border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
 }
-.fact { background: rgba(255, 252, 247, 0.82); padding: 18px 22px; backdrop-filter: blur(6px); }
+.fact { background: rgba(255, 247, 250, 0.82); padding: 18px 22px; backdrop-filter: blur(6px); }
 .fact .k { font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.16em; color: var(--ink-faint); text-transform: uppercase; }
 .fact .v { margin-top: 6px; font-size: 18px; color: var(--ink); font-weight: 500; }
 .fact a.v:hover { color: var(--sage); }
@@ -454,7 +453,7 @@ mark.hl {
   grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
   gap: clamp(28px, 3vw, 56px);
   align-items: stretch;
-  background: rgba(255, 252, 247, 0.88);
+  background: rgba(255, 247, 250, 0.88);
   border: 1px solid var(--line);
   border-radius: 28px;
   overflow: hidden;
@@ -477,7 +476,7 @@ mark.hl {
 .exp-card:hover .exp-media .ph { transform: scale(1.04); }
 .exp-media .ph-label {
   font-family: var(--mono); font-size: 14.5px; letter-spacing: 0.08em; color: var(--ink);
-  background: rgba(255, 252, 247, 0.85); padding: 9px 14px; border-radius: 10px; backdrop-filter: blur(6px);
+  background: rgba(255, 247, 250, 0.85); padding: 9px 14px; border-radius: 10px; backdrop-filter: blur(6px);
 }
 .exp-media .ph-badge {
   position: absolute; top: 22px; left: 22px;
@@ -509,7 +508,7 @@ mark.hl {
 /* 项目区使用更紧凑的卡片网格 */
 .proj-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 3vw, 44px); }
 .proj-card {
-  background: rgba(255, 252, 247, 0.88); border: 1px solid var(--line); border-radius: 26px; overflow: hidden;
+  background: rgba(255, 247, 250, 0.88); border: 1px solid var(--line); border-radius: 26px; overflow: hidden;
   display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr); align-items: stretch;
   backdrop-filter: blur(10px);
   transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
@@ -523,11 +522,11 @@ mark.hl {
 .proj-card:hover .proj-media img { transform: scale(1.05); }
 .proj-media .ph { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 22px; transition: transform 0.7s var(--ease); }
 .proj-card:hover .proj-media .ph { transform: scale(1.05); }
-.proj-media .ph-label { font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; color: var(--ink); background: rgba(255, 252, 247, 0.85); padding: 8px 13px; border-radius: 9px; backdrop-filter: blur(6px); }
+.proj-media .ph-label { font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; color: var(--ink); background: rgba(255, 247, 250, 0.85); padding: 8px 13px; border-radius: 9px; backdrop-filter: blur(6px); }
 .proj-badge {
   position: absolute; left: 22px; bottom: 20px;
   font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em;
-  color: var(--ink); background: rgba(255, 252, 247, 0.88);
+  color: var(--ink); background: rgba(255, 247, 250, 0.88);
   padding: 8px 13px; border-radius: 9px; backdrop-filter: blur(6px);
 }
 .proj-body { padding: clamp(24px, 2.4vw, 34px); display: flex; flex-direction: column; flex: 1; }
@@ -539,7 +538,7 @@ mark.hl {
    校园经历
    ========================================================= */
 .campus-card {
-  background: rgba(255, 252, 247, 0.75);
+  background: rgba(255, 247, 250, 0.75);
   border: 1px solid var(--line); border-radius: 26px; padding: clamp(30px, 3.4vw, 52px);
   display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px, 4vw, 64px); align-items: start;
   backdrop-filter: blur(8px);
@@ -554,7 +553,7 @@ mark.hl {
 /* 文创作品集卡 */
 .wc-card {
   margin-top: clamp(28px, 3vw, 44px);
-  background: rgba(255, 252, 247, 0.88);
+  background: rgba(255, 247, 250, 0.88);
   border: 1px solid var(--line); border-radius: 28px;
   padding: clamp(30px, 3.4vw, 56px);
   box-shadow: var(--shadow-sm);
@@ -602,7 +601,7 @@ mark.hl {
 .games-list { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
 .game-row {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px;
-  background: rgba(255, 252, 247, 0.85); border: 1px solid var(--line); border-radius: 16px;
+  background: rgba(255, 247, 250, 0.85); border: 1px solid var(--line); border-radius: 16px;
   transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 .game-row:hover { border-color: var(--sage); transform: translateX(4px); box-shadow: var(--glow-blue); }
@@ -697,7 +696,7 @@ mark.hl {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--mono); font-size: 14.5px; letter-spacing: 0.08em;
   color: var(--ink-2); text-decoration: none; padding: 8px 14px; border: 1px solid var(--line);
-  border-radius: 999px; background: rgba(255, 252, 247, 0.85); transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  border-radius: 999px; background: rgba(255, 247, 250, 0.85); transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 .wd-back:hover { border-color: var(--sage); color: var(--ink); }
 .wd-bar-title { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -736,14 +735,14 @@ mark.hl {
 .wd-page figcaption {
   position: absolute; right: 12px; bottom: 12px;
   font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.08em; color: var(--ink);
-  background: rgba(255, 252, 247, 0.88); padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px);
+  background: rgba(255, 247, 250, 0.88); padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px);
 }
 .wd-tip { margin-top: 14px; font-family: var(--mono); font-size: 14px; color: var(--ink-soft); letter-spacing: 0.04em; }
 .wd-tip a { color: var(--ink-2); }
 
 .wd-ppt-stage { display: flex; align-items: stretch; gap: 18px; }
 .wd-ppt-nav {
-  flex: 0 0 52px; border: 1px solid var(--line); background: rgba(255, 252, 247, 0.85); border-radius: 16px;
+  flex: 0 0 52px; border: 1px solid var(--line); background: rgba(255, 247, 250, 0.85); border-radius: 16px;
   font-size: 22.5px; color: var(--ink-2); cursor: pointer; transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 .wd-ppt-nav:hover:not(:disabled) { border-color: var(--sage); color: var(--ink); }
@@ -784,7 +783,7 @@ mark.hl {
 .wd-fig figcaption {
   position: absolute; left: 10px; bottom: 10px;
   font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; color: var(--ink);
-  background: rgba(255, 252, 247, 0.88); padding: 5px 10px; border-radius: 8px; backdrop-filter: blur(6px);
+  background: rgba(255, 247, 250, 0.88); padding: 5px 10px; border-radius: 8px; backdrop-filter: blur(6px);
 }
 .wd-lightbox {
   position: fixed; inset: 0; z-index: 100; background: rgba(23, 32, 74, 0.9);
@@ -884,7 +883,7 @@ mark.hl {
 .rp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); }
 .rp-card {
   display: flex; flex-direction: column;
-  background: rgba(255, 252, 247, 0.88); border: 1px solid var(--line);
+  background: rgba(255, 247, 250, 0.88); border: 1px solid var(--line);
   border-radius: 22px; overflow: hidden;
   backdrop-filter: blur(10px);
   transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
@@ -908,7 +907,7 @@ mark.hl {
   position: absolute; top: 14px; left: 14px; z-index: 2;
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase;
   padding: 6px 11px; border-radius: 999px;
-  background: rgba(255, 252, 247, 0.92); color: var(--ink-2);
+  background: rgba(255, 247, 250, 0.92); color: var(--ink-2);
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 .rp-cover-mask {
@@ -977,7 +976,7 @@ mark.hl {
 .rp-aside-dl { margin-top: 20px; display: inline-flex; font-size: 14px !important; }
 
 .rp-doc {
-  background: rgba(255, 252, 247, 0.94); border: 1px solid var(--line);
+  background: rgba(255, 247, 250, 0.94); border: 1px solid var(--line);
   border-radius: 22px; padding: clamp(26px, 3.6vw, 56px);
   box-shadow: var(--shadow-sm);
 }
@@ -1108,41 +1107,3 @@ mark.hl {
 .aigc-stats i { display: block; font-style: normal; margin-top: 4px; font-size: 14.5px; color: var(--ink-soft); }
 .aigc-go { margin-top: 10px; font-size: 16px; font-weight: 500; border-bottom: 1.5px solid var(--ink); padding-bottom: 3px; }
 @media (max-width: 900px) { .aigc-panel { min-height: 0; } }
-
-
-/* ===== 可交互 Q 版形象（透明人物 · 帧动画，直接站在网页里）===== */
-.qchar.portrait {
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  overflow: visible;
-  cursor: pointer;
-  outline: none;
-}
-.qchar.portrait::after { display: none; }
-.qchar .q-stack { position: absolute; inset: 0; transform-origin: 50% 92%; }
-.qchar .q-frame {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: contain; object-position: center bottom;
-  display: block; opacity: 0; pointer-events: none;
-}
-.qchar .q-frame:first-child { opacity: 1; }
-.qchar .q-shadow {
-  position: absolute; left: 50%; bottom: 3%; transform: translateX(-50%);
-  width: 42%; height: 3%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(38, 50, 88, 0.22), rgba(38, 50, 88, 0) 72%);
-  filter: blur(5px);
-}
-.qchar.is-greeting .q-stack { animation: qbob 2s ease-in-out infinite; }
-@keyframes qbob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(0.8deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .qchar.is-greeting .q-stack { animation: none; }
-}
-
-
-/* 静态 Q 版形象：透明背景，直接融入页面底色 */
-.portrait { position: relative; }
-.portrait img { width: 100%; height: auto; display: block; object-fit: contain; }
