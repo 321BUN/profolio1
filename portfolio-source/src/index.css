@@ -1123,7 +1123,7 @@ mark.hl {
 
 .sm-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 34%);
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 26vw, 340px);
   background: rgba(255, 247, 250, 0.88);
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -1137,7 +1137,7 @@ mark.hl {
   width: 100%;
   aspect-ratio: 4 / 5;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   padding: 0;
   margin: 0;
   background: var(--surface-2);
@@ -1246,7 +1246,7 @@ mark.hl {
 
 @media (max-width: 900px) {
   .sm-card { grid-template-columns: 1fr; }
-  .sm-card-media { border-right: 0; border-bottom: 1px solid var(--line); }
+  .sm-card-media { border-left: 0; border-top: 1px solid var(--line); }
   .sm-card-body { padding: 22px; }
   .sm-row { padding-top: 16px; }
 }

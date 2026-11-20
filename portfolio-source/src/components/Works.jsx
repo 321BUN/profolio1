@@ -128,15 +128,6 @@ export default function Works({ query }) {
           <div className="sm-cards">
             {socialAccounts.map((a) => (
               <article className="sm-card" key={a.id}>
-                <button
-                  className="sm-card-media"
-                  type="button"
-                  onClick={() => setLightbox(a)}
-                  title="点击放大查看完整截图"
-                >
-                  <img src={a.preview} alt={a.alt} loading="lazy" />
-                  <span className="sm-zoom">点击放大 ⤢</span>
-                </button>
                 <div className="sm-card-body">
                   <div className="sm-no">{a.no}</div>
                   <div className="sm-name"><Highlight text={a.name} query={query} /></div>
@@ -146,6 +137,15 @@ export default function Works({ query }) {
                     <a className="sm-btn" href={a.link} target="_blank" rel="noreferrer">访问主页 ↗</a>
                   </div>
                 </div>
+                <button
+                  className="sm-card-media"
+                  type="button"
+                  onClick={() => setLightbox(a)}
+                  title="点击放大查看完整截图"
+                >
+                  <img src={a.preview} alt={a.alt} />
+                  <span className="sm-zoom">点击放大 ⤢</span>
+                </button>
               </article>
             ))}
           </div>
