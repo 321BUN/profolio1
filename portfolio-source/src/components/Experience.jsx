@@ -32,14 +32,16 @@ function ExpCard({ item, index, query }) {
           ))}
         </ul>
 
-        <div className="exp-metrics">
-          {item.metrics.map((m) => (
-            <div className="metric" key={m.k}>
-              <div className="mv">{m.v}</div>
-              <div className="mk">{m.k}</div>
-            </div>
-          ))}
-        </div>
+        {item.metrics && item.metrics.length > 0 && (
+          <div className="exp-metrics">
+            {item.metrics.map((m) => (
+              <div className="metric" key={m.k}>
+                <div className="mv">{m.v}</div>
+                <div className="mk">{m.k}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   )

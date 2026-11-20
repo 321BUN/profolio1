@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Highlight from './Highlight'
 import { portfolio, aigcAccount } from '../data/resume'
 import { reportList } from '../data/reports'
@@ -9,7 +10,68 @@ const goHash = (e, hash) => {
   window.location.hash = hash
 }
 
+const socialAccounts = [
+  {
+    id: 'sm-chengzi',
+    no: '01',
+    name: '吃点橙子',
+    role: '欢聚集团 · 实习运营账号',
+    desc: '以聊天记录形式做方言与地域文化梗，多条笔记收获数千赞与高互动。',
+    link: 'https://www.xiaohongshu.com/user/profile/682058e1000000000d009073',
+    preview: `${B}xhs-chengzi-preview.jpg`,
+    full: `${B}xhs-chengzi-full.jpg`,
+    alt: '吃点橙子 · 方言梗聊天记录笔记',
+  },
+  {
+    id: 'sm-game',
+    no: '02',
+    name: '壹只大游物TEAM',
+    role: '远岸连山 · 实习运营账号',
+    desc: '拆解游戏发行与营销事件，从三角洲增长到二游直播，输出长图文分析。',
+    link: 'https://www.xiaohongshu.com/user/profile/6922b40d000000003702e529',
+    preview: `${B}xhs-game-preview.jpg`,
+    full: `${B}xhs-game-full.jpg`,
+    alt: '壹只大游物TEAM · 游戏营销拆解笔记',
+  },
+  {
+    id: 'sm-nvshu',
+    no: '03',
+    name: 'GenZ女书艺术发展计划',
+    role: '女书文化 · 女性成长共创',
+    desc: '以女书文化与女性成长为内核，聚合高校学子做内容传播与线下活动。',
+    link: 'https://www.xiaohongshu.com/user/profile/648537a60000000010035bac',
+    preview: `${B}xhs-nvshu-preview.jpg`,
+    full: `${B}xhs-nvshu-full.jpg`,
+    alt: 'GenZ女书艺术发展计划 · 小红书主页',
+  },
+]
+
+function Lightbox({ item, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
+  }, [onClose])
+  return (
+    <div className="sm-lightbox" onClick={onClose} role="dialog" aria-modal="true" aria-label="图片放大预览">
+      <div className="sm-lightbox-box" onClick={(e) => e.stopPropagation()}>
+        <img src={item.full} alt={item.alt} />
+        <div className="sm-lightbox-bar">
+          <span>{item.alt}</span>
+          <div className="sm-lightbox-actions">
+            <a href={item.full} target="_blank" rel="noreferrer">查看原图 ↗</a>
+            <button type="button" onClick={onClose}>关闭 ✕</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Works({ query }) {
+  const [lightbox, setLightbox] = useState(null)
   return (
     <section id="works" className="section">
       <div className="container">
@@ -18,6 +80,75 @@ export default function Works({ query }) {
           <span className="section-en">Works</span>
           <h2 className="section-title">作品集</h2>
           <span className="section-rule" />
+        </div>
+
+        {/* 自媒体账号组 · 前置到作品集最前 */}
+        <div className="sm-group" id="social">
+          {/* AIGC 自媒体账号 */}
+          <article className="wc-card" id="aigc">
+            <div className="wc-badge">{aigcAccount.badge}</div>
+            <div className="wc-grid">
+              <div className="wc-body">
+                <div className="wc-title">
+                  <Highlight text={aigcAccount.name} query={query} />
+                </div>
+                <div className="wc-meta">{aigcAccount.meta}</div>
+                <p className="wc-summary"><Highlight text={aigcAccount.summary} query={query} /></p>
+                <div className="exp-tags">
+                  {aigcAccount.tags.map((t) => (
+                    <span className="tag" key={t}><Highlight text={t} query={query} /></span>
+                  ))}
+                </div>
+                <ul className="exp-highlights">
+                  {aigcAccount.highlights.map((h, i) => (
+                    <li key={i}><Highlight text={h} query={query} /></li>
+                  ))}
+                </ul>
+                <div className="wc-hint">小红书号 49624163325 · 动态视频内容 · 持续更新</div>
+              </div>
+              <a className="aigc-panel" href={aigcAccount.link} target="_blank" rel="noreferrer" title="访问小红书主页">
+                <span
+                  className="aigc-marquee"
+                  style={{ backgroundImage: `url(${aigcAccount.covers})` }}
+                  role="img"
+                  aria-label="「转念花开」笔记封面滚动预览"
+                />
+                <span className="aigc-kicker">Xiaohongshu · 小红书</span>
+                <span className="aigc-name">转念花开</span>
+                <span className="aigc-sign">「{aigcAccount.sign}」</span>
+                <div className="aigc-stats">
+                  {aigcAccount.metrics.map((m) => (
+                    <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
+                  ))}
+                </div>
+                <span className="aigc-go">访问主页 →</span>
+              </a>
+            </div>
+          </article>
+          <div className="sm-cards">
+            {socialAccounts.map((a) => (
+              <article className="sm-card" key={a.id}>
+                <button
+                  className="sm-card-media"
+                  type="button"
+                  onClick={() => setLightbox(a)}
+                  title="点击放大查看完整截图"
+                >
+                  <img src={a.preview} alt={a.alt} loading="lazy" />
+                  <span className="sm-zoom">点击放大 ⤢</span>
+                </button>
+                <div className="sm-card-body">
+                  <div className="sm-no">{a.no}</div>
+                  <div className="sm-name"><Highlight text={a.name} query={query} /></div>
+                  <div className="sm-role">{a.role}</div>
+                  <p className="sm-desc"><Highlight text={a.desc} query={query} /></p>
+                  <div className="sm-row">
+                    <a className="sm-btn" href={a.link} target="_blank" rel="noreferrer">访问主页 ↗</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
         {/* 文创作品集 */}
@@ -68,47 +199,6 @@ export default function Works({ query }) {
           </div>
         </article>
 
-        {/* AIGC 自媒体账号 */}
-        <article className="wc-card" id="aigc">
-          <div className="wc-badge">{aigcAccount.badge}</div>
-          <div className="wc-grid">
-            <div className="wc-body">
-              <div className="wc-title">
-                <Highlight text={aigcAccount.name} query={query} />
-              </div>
-              <div className="wc-meta">{aigcAccount.meta}</div>
-              <p className="wc-summary"><Highlight text={aigcAccount.summary} query={query} /></p>
-              <div className="exp-tags">
-                {aigcAccount.tags.map((t) => (
-                  <span className="tag" key={t}><Highlight text={t} query={query} /></span>
-                ))}
-              </div>
-              <ul className="exp-highlights">
-                {aigcAccount.highlights.map((h, i) => (
-                  <li key={i}><Highlight text={h} query={query} /></li>
-                ))}
-              </ul>
-              <div className="wc-hint">小红书号 49624163325 · 动态视频内容 · 持续更新</div>
-            </div>
-            <a className="aigc-panel" href={aigcAccount.link} target="_blank" rel="noreferrer" title="访问小红书主页">
-              <span
-                className="aigc-marquee"
-                style={{ backgroundImage: `url(${aigcAccount.covers})` }}
-                role="img"
-                aria-label="「转念花开」笔记封面滚动预览"
-              />
-              <span className="aigc-kicker">Xiaohongshu · 小红书</span>
-              <span className="aigc-name">转念花开</span>
-              <span className="aigc-sign">「{aigcAccount.sign}」</span>
-              <div className="aigc-stats">
-                {aigcAccount.metrics.map((m) => (
-                  <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
-                ))}
-              </div>
-              <span className="aigc-go">访问主页 →</span>
-            </a>
-          </div>
-        </article>
 
         {/* 游戏拆解分析报告 */}
         <div className="rp-block">
@@ -182,6 +272,7 @@ export default function Works({ query }) {
           </div>
         </div>
       </div>
+      {lightbox && <Lightbox item={lightbox} onClose={() => setLightbox(null)} />}
     </section>
   )
 }
