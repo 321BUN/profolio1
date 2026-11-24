@@ -106,143 +106,163 @@ export default function Works({ query }) {
           <span className="section-rule" />
         </div>
 
-        {/* 自媒体账号组 · 前置到作品集最前 */}
-        <div className="sm-group" id="social">
-          {/* AIGC 自媒体账号 */}
-          <article className="wc-card" id="aigc">
-            <div className="wc-badge">{aigcAccount.badge}</div>
+        {/* ===== 子栏目 01 · 自媒体账号 ===== */}
+        <div className="ws-col" id="ws-social">
+          <div className="ws-col-head">
+            <span className="ws-col-no">01</span>
+            <span className="ws-col-en">Social Media</span>
+            <h3 className="ws-col-title">自媒体账号运营</h3>
+            <span className="ws-col-rule" />
+            <span className="ws-col-note">账号矩阵 · 内容实践</span>
+          </div>
+          {/* 自媒体账号组 · 前置到作品集最前 */}
+          <div className="sm-group" id="social">
+            {/* AIGC 自媒体账号 */}
+            <article className="wc-card" id="aigc">
+              <div className="wc-badge">{aigcAccount.badge}</div>
+              <div className="wc-grid">
+                <div className="wc-body">
+                  <div className="wc-title">
+                    <Highlight text={aigcAccount.name} query={query} />
+                  </div>
+                  <div className="wc-meta">{aigcAccount.meta}</div>
+                  <p className="wc-summary"><Highlight text={aigcAccount.summary} query={query} /></p>
+                  <div className="exp-tags">
+                    {aigcAccount.tags.map((t) => (
+                      <span className="tag" key={t}><Highlight text={t} query={query} /></span>
+                    ))}
+                  </div>
+                  <ul className="exp-highlights">
+                    {aigcAccount.highlights.map((h, i) => (
+                      <li key={i}><Highlight text={h} query={query} /></li>
+                    ))}
+                  </ul>
+                  <div className="wc-hint">小红书号 49624163325 · 动态视频内容 · 持续更新</div>
+                </div>
+                <a className="aigc-panel" href={aigcAccount.link} target="_blank" rel="noreferrer" title="访问小红书主页">
+                  <span
+                    className="aigc-marquee"
+                    style={{ backgroundImage: `url(${aigcAccount.covers})` }}
+                    role="img"
+                    aria-label="「转念花开」笔记封面滚动预览"
+                  />
+                  <span className="aigc-kicker">Xiaohongshu · 小红书</span>
+                  <span className="aigc-name">转念花开</span>
+                  <span className="aigc-sign">「{aigcAccount.sign}」</span>
+                  <div className="aigc-stats">
+                    {aigcAccount.metrics.map((m) => (
+                      <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
+                    ))}
+                  </div>
+                  <span className="aigc-go">访问主页 →</span>
+                </a>
+              </div>
+            </article>
+            <div className="sm-cards">
+              {socialAccounts.map((a) => (
+                <article className="ac-card" key={a.id}>
+                  <div className="ac-badge">Social Media · {a.cat}</div>
+                  <div className="ac-grid">
+                    <div className="ac-body">
+                      <div className="ac-title"><Highlight text={a.name} query={query} /></div>
+                      <div className="ac-meta">{a.meta}</div>
+                      <p className="ac-sum"><Highlight text={a.sum} query={query} /></p>
+                      <div className="exp-tags">
+                        {a.tags.map((t) => (
+                          <span className="tag" key={t}><Highlight text={t} query={query} /></span>
+                        ))}
+                      </div>
+                      <ul className="exp-highlights">
+                        {a.highlights.map((h, i) => (
+                          <li key={i}><Highlight text={h} query={query} /></li>
+                        ))}
+                      </ul>
+                      <div className="ac-hint">{a.hint}</div>
+                    </div>
+                    <div className="ac-panel">
+                      <button
+                        className="ac-cover"
+                        type="button"
+                        onClick={() => setLightbox(a)}
+                        title="点击放大查看完整截图"
+                      >
+                        <img src={a.cover} alt={a.alt} />
+                        <span className="ac-zoom">点击放大 ⤢</span>
+                      </button>
+                      <span className="ac-kicker">Xiaohongshu · 小红书</span>
+                      <span className="ac-name">{a.name}</span>
+                      <span className="ac-sign">「{a.sign}」</span>
+                      <div className="ac-stats">
+                        {a.stats.map((m) => (
+                          <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
+                        ))}
+                      </div>
+                      <a className="ac-go" href={a.link} target="_blank" rel="noreferrer">访问主页 →</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ===== 子栏目 02 · 文创作品 ===== */}
+        <div className="ws-col" id="ws-wenchuang">
+          <div className="ws-col-head">
+            <span className="ws-col-no">02</span>
+            <span className="ws-col-en">Cultural Creative</span>
+            <h3 className="ws-col-title">文创作品集</h3>
+            <span className="ws-col-rule" />
+            <span className="ws-col-note">项目全景 · 设计实践</span>
+          </div>
+          {/* 文创作品集 */}
+          <article className="wc-card" id="portfolio">
+            <div className="wc-badge">Portfolio · 文创作品集</div>
             <div className="wc-grid">
               <div className="wc-body">
                 <div className="wc-title">
-                  <Highlight text={aigcAccount.name} query={query} />
+                  <Highlight text={portfolio.title} query={query} />
                 </div>
-                <div className="wc-meta">{aigcAccount.meta}</div>
-                <p className="wc-summary"><Highlight text={aigcAccount.summary} query={query} /></p>
+                <div className="wc-meta">
+                  {portfolio.titleEn} · {portfolio.role} · {portfolio.period}
+                </div>
+                <p className="wc-summary"><Highlight text={portfolio.summary} query={query} /></p>
                 <div className="exp-tags">
-                  {aigcAccount.tags.map((t) => (
+                  {portfolio.tags.map((t) => (
                     <span className="tag" key={t}><Highlight text={t} query={query} /></span>
                   ))}
                 </div>
                 <ul className="exp-highlights">
-                  {aigcAccount.highlights.map((h, i) => (
+                  {portfolio.highlights.map((h, i) => (
                     <li key={i}><Highlight text={h} query={query} /></li>
                   ))}
                 </ul>
-                <div className="wc-hint">小红书号 49624163325 · 动态视频内容 · 持续更新</div>
+                <a
+                  className="btn-primary wc-more"
+                  href="#/work/wenchuang"
+                  onClick={(e) => goHash(e, '#/work/wenchuang')}
+                >
+                  查看完整作品
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+                <div className="wc-hint">项目视频 · 41 页手册全文 · 27 页答辩 PPT · 10 张作品图</div>
               </div>
-              <a className="aigc-panel" href={aigcAccount.link} target="_blank" rel="noreferrer" title="访问小红书主页">
-                <span
-                  className="aigc-marquee"
-                  style={{ backgroundImage: `url(${aigcAccount.covers})` }}
-                  role="img"
-                  aria-label="「转念花开」笔记封面滚动预览"
-                />
-                <span className="aigc-kicker">Xiaohongshu · 小红书</span>
-                <span className="aigc-name">转念花开</span>
-                <span className="aigc-sign">「{aigcAccount.sign}」</span>
-                <div className="aigc-stats">
-                  {aigcAccount.metrics.map((m) => (
-                    <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
-                  ))}
-                </div>
-                <span className="aigc-go">访问主页 →</span>
-              </a>
+              <div
+                className="wc-imgs wc-imgs-click"
+                onClick={() => { window.location.hash = '#/work/wenchuang' }}
+                title="点击查看完整作品"
+              >
+                {portfolio.images.map((im) => (
+                  <figure className="wc-fig" key={im.src}>
+                    <img src={im.src} alt={im.alt} />
+                  </figure>
+                ))}
+              </div>
             </div>
           </article>
-          <div className="sm-cards">
-            {socialAccounts.map((a) => (
-              <article className="ac-card" key={a.id}>
-                <div className="ac-badge">Social Media · {a.cat}</div>
-                <div className="ac-grid">
-                  <div className="ac-body">
-                    <div className="ac-title"><Highlight text={a.name} query={query} /></div>
-                    <div className="ac-meta">{a.meta}</div>
-                    <p className="ac-sum"><Highlight text={a.sum} query={query} /></p>
-                    <div className="exp-tags">
-                      {a.tags.map((t) => (
-                        <span className="tag" key={t}><Highlight text={t} query={query} /></span>
-                      ))}
-                    </div>
-                    <ul className="exp-highlights">
-                      {a.highlights.map((h, i) => (
-                        <li key={i}><Highlight text={h} query={query} /></li>
-                      ))}
-                    </ul>
-                    <div className="ac-hint">{a.hint}</div>
-                  </div>
-                  <div className="ac-panel">
-                    <button
-                      className="ac-cover"
-                      type="button"
-                      onClick={() => setLightbox(a)}
-                      title="点击放大查看完整截图"
-                    >
-                      <img src={a.cover} alt={a.alt} />
-                      <span className="ac-zoom">点击放大 ⤢</span>
-                    </button>
-                    <span className="ac-kicker">Xiaohongshu · 小红书</span>
-                    <span className="ac-name">{a.name}</span>
-                    <span className="ac-sign">「{a.sign}」</span>
-                    <div className="ac-stats">
-                      {a.stats.map((m) => (
-                        <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
-                      ))}
-                    </div>
-                    <a className="ac-go" href={a.link} target="_blank" rel="noreferrer">访问主页 →</a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
-
-        {/* 文创作品集 */}
-        <article className="wc-card" id="portfolio">
-          <div className="wc-badge">Portfolio · 文创作品集</div>
-          <div className="wc-grid">
-            <div className="wc-body">
-              <div className="wc-title">
-                <Highlight text={portfolio.title} query={query} />
-              </div>
-              <div className="wc-meta">
-                {portfolio.titleEn} · {portfolio.role} · {portfolio.period}
-              </div>
-              <p className="wc-summary"><Highlight text={portfolio.summary} query={query} /></p>
-              <div className="exp-tags">
-                {portfolio.tags.map((t) => (
-                  <span className="tag" key={t}><Highlight text={t} query={query} /></span>
-                ))}
-              </div>
-              <ul className="exp-highlights">
-                {portfolio.highlights.map((h, i) => (
-                  <li key={i}><Highlight text={h} query={query} /></li>
-                ))}
-              </ul>
-              <a
-                className="btn-primary wc-more"
-                href="#/work/wenchuang"
-                onClick={(e) => goHash(e, '#/work/wenchuang')}
-              >
-                查看完整作品
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-              <div className="wc-hint">项目视频 · 41 页手册全文 · 27 页答辩 PPT · 10 张作品图</div>
-            </div>
-            <div
-              className="wc-imgs wc-imgs-click"
-              onClick={() => { window.location.hash = '#/work/wenchuang' }}
-              title="点击查看完整作品"
-            >
-              {portfolio.images.map((im) => (
-                <figure className="wc-fig" key={im.src}>
-                  <img src={im.src} alt={im.alt} />
-                </figure>
-              ))}
-            </div>
-          </div>
-        </article>
 
 
         {/* 游戏拆解分析报告 */}

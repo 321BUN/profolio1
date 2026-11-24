@@ -1213,3 +1213,45 @@ mark.hl {
   .ac-card { padding: 22px; }
   .ac-panel { padding: 20px; }
 }
+
+/* =========================================================
+   作品集两类内容分栏：自媒体账号 / 文创作品
+   用编号子栏目头 + 分隔线把两类内容划开，仍同属作品集 section
+   （配色沿用现有变量，自动跟随正文渐变）
+   ========================================================= */
+.ws-col { margin-top: 0; }
+.ws-col + .ws-col {
+  margin-top: clamp(40px, 4.4vw, 64px);
+  padding-top: clamp(40px, 4.4vw, 64px);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.ws-col + .ws-col::before {
+  content: ''; position: absolute; top: -3px; left: 0;
+  width: 46px; height: 5px; border-radius: 999px;
+  background: var(--sage); opacity: .55;
+}
+.ws-col-head {
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+}
+.ws-col-no {
+  font-family: var(--mono); font-size: 14px; font-weight: 600;
+  letter-spacing: .16em; color: var(--sage);
+}
+.ws-col-en {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.ws-col-title {
+  font-family: var(--serif); font-size: clamp(21px, 2.3vw, 30px);
+  font-weight: 600; letter-spacing: .01em;
+}
+.ws-col-rule { flex: 1; min-width: 30px; height: 1px; background: var(--line); align-self: center; }
+.ws-col-note { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: .04em; }
+.ws-col > .sm-group, .ws-col > .wc-card { margin-top: 0; }
+
+@media (max-width: 640px) {
+  .ws-col-head { gap: 10px 14px; }
+  .ws-col-note { width: 100%; }
+}
