@@ -3,7 +3,7 @@ import { campus } from '../data/resume'
 
 export default function Campus({ query }) {
   return (
-    <section id="campus" className="section" style={{ background: 'var(--paper-2)' }}>
+    <section id="campus" className="section">
       <div className="container">
         <div className="section-head">
           <span className="section-no">04</span>

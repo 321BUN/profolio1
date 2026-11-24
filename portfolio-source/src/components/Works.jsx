@@ -13,36 +13,60 @@ const goHash = (e, hash) => {
 const socialAccounts = [
   {
     id: 'sm-chengzi',
-    no: '01',
+    cat: '方言文化内容',
     name: '吃点橙子',
-    role: '欢聚集团 · 实习运营账号',
-    desc: '以聊天记录形式做方言与地域文化梗，多条笔记收获数千赞与高互动。',
+    meta: '欢聚集团 · 实习运营账号 · 小红书',
+    sum: '以聊天记录的形式做方言与地域文化梗，围绕粤语、河南话等日常语感创作高互动内容，多条笔记进入热门。',
+    tags: ['方言梗', '聊天记录', '地域文化', '高互动'],
+    highlights: [
+      '内容形式：把日常对话截图做成笔记，「古风小生」「河南话很哲学」等选题引发地域共鸣。',
+      '数据表现：单篇最高 7684 赞、301 收藏、2542 评论，多条笔记点赞破千。',
+    ],
+    hint: '小红书 · 聊天记录长图 · 持续更新',
+    sign: '原来古风小生只是你们广东人的日常',
+    stats: [{ v: '7684', k: '单篇最高点赞' }, { v: '2542', k: '单篇最高评论' }],
     link: 'https://www.xiaohongshu.com/user/profile/682058e1000000000d009073',
-    preview: `${B}xhs-chengzi-preview.jpg`,
+    cover: `${B}xhs-chengzi-preview.jpg`,
     full: `${B}xhs-chengzi-full.jpg`,
-    alt: '吃点橙子 · 方言梗聊天记录笔记',
+    alt: '吃点橙子 · 三屏聊天记录笔记（含点赞收藏评论数据）',
   },
   {
     id: 'sm-game',
-    no: '02',
+    cat: '游戏营销拆解',
     name: '壹只大游物TEAM',
-    role: '远岸连山 · 实习运营账号',
-    desc: '拆解游戏发行与营销事件，从三角洲增长到二游直播，输出长图文分析。',
+    meta: '远岸连山 · 实习运营账号 · 小红书',
+    sum: '拆解游戏发行与营销事件，从三角洲增长到二游直播，输出长图文分析，沉淀可复用的营销观察方法。',
+    tags: ['游戏营销', '案例拆解', '长图文', '发行策略'],
+    highlights: [
+      '选题方向：「三角洲的传奇增长」「二游抖次元直播」等发行与增长事件复盘。',
+      '内容形式：封面主标题 + 数据与事件线，长图文拆解营销打法。',
+    ],
+    hint: '小红书 · 营销观察长图文 · 持续更新',
+    sign: '如何锻造游戏长青的发行思路',
+    stats: [{ v: '2 篇', k: '代表拆解' }, { v: '长图文', k: '内容形式' }],
     link: 'https://www.xiaohongshu.com/user/profile/6922b40d000000003702e529',
-    preview: `${B}xhs-game-preview.jpg`,
+    cover: `${B}xhs-game-cover.jpg`,
     full: `${B}xhs-game-full.jpg`,
-    alt: '壹只大游物TEAM · 游戏营销拆解笔记',
+    alt: '壹只大游物TEAM · 游戏营销拆解封面',
   },
   {
     id: 'sm-nvshu',
-    no: '03',
+    cat: '女书文化共创',
     name: 'GenZ女书艺术发展计划',
-    role: '女书文化 · 女性成长共创',
-    desc: '以女书文化与女性成长为内核，聚合高校学子做内容传播与线下活动。',
+    meta: '女书文化 · 女性成长共创 · 小红书',
+    sum: '以女书文化与女性成长为内核，聚合高校学子做内容传播与线下活动，让非遗文字进入当代语境。',
+    tags: ['女书文化', '女性成长', '高校共创', '线下活动'],
+    highlights: [
+      '传播行动：「妇女节，我们把女书写上大屏」等城市公共空间投放。',
+      '共创机制：CSC 城市画布作品征集，聚合高校学子参与创作。',
+    ],
+    hint: '小红书 · 城市画布 · 作品征集',
+    sign: '把女书写上大屏，也写进日常',
+    stats: [{ v: '5000', k: '粉丝' }, { v: '8.4 万', k: '获赞与收藏' }],
     link: 'https://www.xiaohongshu.com/user/profile/648537a60000000010035bac',
-    preview: `${B}xhs-nvshu-preview.jpg`,
+    cover: `${B}xhs-nvshu-cover.jpg`,
     full: `${B}xhs-nvshu-full.jpg`,
-    alt: 'GenZ女书艺术发展计划 · 小红书主页',
+    alt: 'GenZ女书艺术发展计划 · 小红书主页与笔记',
   },
 ]
 
@@ -127,25 +151,46 @@ export default function Works({ query }) {
           </article>
           <div className="sm-cards">
             {socialAccounts.map((a) => (
-              <article className="sm-card" key={a.id}>
-                <div className="sm-card-body">
-                  <div className="sm-no">{a.no}</div>
-                  <div className="sm-name"><Highlight text={a.name} query={query} /></div>
-                  <div className="sm-role">{a.role}</div>
-                  <p className="sm-desc"><Highlight text={a.desc} query={query} /></p>
-                  <div className="sm-row">
-                    <a className="sm-btn" href={a.link} target="_blank" rel="noreferrer">访问主页 ↗</a>
+              <article className="ac-card" key={a.id}>
+                <div className="ac-badge">Social Media · {a.cat}</div>
+                <div className="ac-grid">
+                  <div className="ac-body">
+                    <div className="ac-title"><Highlight text={a.name} query={query} /></div>
+                    <div className="ac-meta">{a.meta}</div>
+                    <p className="ac-sum"><Highlight text={a.sum} query={query} /></p>
+                    <div className="exp-tags">
+                      {a.tags.map((t) => (
+                        <span className="tag" key={t}><Highlight text={t} query={query} /></span>
+                      ))}
+                    </div>
+                    <ul className="exp-highlights">
+                      {a.highlights.map((h, i) => (
+                        <li key={i}><Highlight text={h} query={query} /></li>
+                      ))}
+                    </ul>
+                    <div className="ac-hint">{a.hint}</div>
+                  </div>
+                  <div className="ac-panel">
+                    <button
+                      className="ac-cover"
+                      type="button"
+                      onClick={() => setLightbox(a)}
+                      title="点击放大查看完整截图"
+                    >
+                      <img src={a.cover} alt={a.alt} />
+                      <span className="ac-zoom">点击放大 ⤢</span>
+                    </button>
+                    <span className="ac-kicker">Xiaohongshu · 小红书</span>
+                    <span className="ac-name">{a.name}</span>
+                    <span className="ac-sign">「{a.sign}」</span>
+                    <div className="ac-stats">
+                      {a.stats.map((m) => (
+                        <div key={m.k}><b>{m.v}</b><i>{m.k}</i></div>
+                      ))}
+                    </div>
+                    <a className="ac-go" href={a.link} target="_blank" rel="noreferrer">访问主页 →</a>
                   </div>
                 </div>
-                <button
-                  className="sm-card-media"
-                  type="button"
-                  onClick={() => setLightbox(a)}
-                  title="点击放大查看完整截图"
-                >
-                  <img src={a.preview} alt={a.alt} />
-                  <span className="sm-zoom">点击放大 ⤢</span>
-                </button>
               </article>
             ))}
           </div>
